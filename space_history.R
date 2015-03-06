@@ -21,4 +21,5 @@ PlotDatabaseSpace(tbs,"RAC",2100,exclusions,chart.type = 'facet',output.screen =
 
 PlotDatabaseSpace(tbs,"FCPROD",150000,output.screen = TRUE,output.file = "FCPROD.png")
 
-tbs
+current_tbs <- tbs %>% group_by(db_name,date_key) %>% summarise(size = sum(size_mb)) %>%
+  filter(date_key > now() - (86400 * 2))
